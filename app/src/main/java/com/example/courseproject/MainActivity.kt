@@ -20,14 +20,15 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until rows){
             val lin = LinearLayout(this)
             lin.setTag("row "+i)
-            lin.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            linear.addView(lin)
+            lin.orientation = LinearLayout.HORIZONTAL
+//            lin.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             for (j in 0 until cols){
                 val button = Button(this)
                 button.setTag(i.toString()+j.toString())
                 button.setBackgroundResource(R.drawable.circle_btn)
                 lin.addView(button)
             }
+            linear.addView(lin)
         }
     }
 }
