@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
                 button.setBackgroundResource(R.drawable.circle_btn)
                 lin.addView(button)
             }
+
             linear.addView(lin)
         }
     }
