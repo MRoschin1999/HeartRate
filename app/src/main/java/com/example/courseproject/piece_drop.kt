@@ -1,22 +1,22 @@
 class piece_drop {
-    var x: Int = 0;
-    var y: Int = 0;
+    var row: Int = 0;
+    var col: Int = 0;
     var mark: Int = 1;
     var win: Boolean = false;
 
-    constructor(x: Int, y: Int, mark: Int, win: Boolean) {
-        this.x = x;
-        this.y = y;
+    constructor(row: Int, col: Int, mark: Int, win: Boolean) {
+        this.row = row;
+        this.col = col;
         this.mark = mark;
         this.win = win;
     }
 
-    fun get_x(): Int {
-        return this.x;
+    fun get_row(): Int {
+        return this.row;
     }
 
-    fun get_y(): Int {
-        return this.y;
+    fun get_col(): Int {
+        return this.col;
     }
 
     fun get_mark(): Int {

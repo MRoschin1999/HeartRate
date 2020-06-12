@@ -1,5 +1,6 @@
 package com.example.courseproject
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,27 +9,35 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TableLayout
+import Observation
+import Config
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var rows = 6
-        var cols = 7
-        val linear = findViewById(R.id.basic_linear) as LinearLayout
-        for (i in 0 until rows){
-            val lin = LinearLayout(this)
-            lin.setTag("row "+i)
-            lin.orientation = LinearLayout.HORIZONTAL
-//            lin.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            for (j in 0 until cols){
-                val button = Button(this)
-                button.setTag(i.toString()+j.toString())
-                button.setBackgroundResource(R.drawable.circle_btn)
-                lin.addView(button)
+        var config:Config = Config(6,7,4)
+        var observation:Observation = Observation(config)
+        for (i in 0 until 6){
+            for (j in 0 until 7){
+                var buttonID:String = "button_"+i+j
+                var resID:Int = resources.getIdentifier(buttonID,"id",packageName)
+                var a =findViewById<Button>(resID)
+                a.setOnClickListener{
+                    var res = observation.nextMove(config,j)
+                    observation.board[res.row][res.col] = res.mark
+                    buttonID ="button_"+res.row+res.col
+                    resID= resources.getIdentifier(buttonID,"id",packageName)
+                    a = findViewById(resID)
+                    if (!res.win) {
+                        if (res.mark == 1)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue_btn));
+                        if (res.mark == 2)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
+                    }
+                }
             }
-            linear.addView(lin)
         }
     }
 }
