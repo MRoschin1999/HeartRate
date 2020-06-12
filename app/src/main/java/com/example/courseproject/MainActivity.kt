@@ -1,16 +1,12 @@
 package com.example.courseproject
 
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TableLayout
-import Observation
 import Config
+import Observation
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +15,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var config:Config = Config(6,7,4)
         var observation:Observation = Observation(config)
+        val toast = Toast.makeText(
+            applicationContext,
+            "vot i vse",
+            Toast.LENGTH_SHORT
+        )
         for (i in 0 until 6){
             for (j in 0 until 7){
                 var buttonID:String = "button_"+i+j
@@ -35,7 +36,20 @@ class MainActivity : AppCompatActivity() {
                             a.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue_btn));
                         if (res.mark == 2)
                             a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
+                    } else{
+                        toast.show()
+
                     }
+                }
+            }
+        }
+        fun resetGame(){
+            for (i in 0 until 6) {
+                for (j in 0 until 7) {
+                    var buttonID: String = "button_" + i + j
+                    var resID: Int = resources.getIdentifier(buttonID, "id", packageName)
+                    var a = findViewById<Button>(resID)
+                    a.setBackgroundDrawable(getResources().getDrawable(R.drawable.circle_btn));
                 }
             }
         }
