@@ -28,7 +28,7 @@ class Observation {
 //        Horizontal
         for (row in 0 until config.get_n()) {
             res = true
-            for (col in 0 until (config.get_m() - config.get_row_to_win())) {
+            for (col in 0 .. (config.get_m() - config.get_row_to_win())) {
                 for (i in 0 until config.get_row_to_win()) {
                     res = res and (this.board[row][col + i] == this.mark)
                 }
@@ -37,7 +37,7 @@ class Observation {
         }
 //        Vertical
         for (col in 0 until config.get_m()) {
-            for (row in 0 until (config.get_n() - config.get_row_to_win())) {
+            for (row in 0 .. (config.get_n() - config.get_row_to_win())) {
                 res = true
                 for (i in 0 until config.get_row_to_win()) {
                     res = res and (this.board[row + i][col] == this.mark)
@@ -47,7 +47,7 @@ class Observation {
         }
 //        Diagonal positive
         for (row in 0 until (config.get_n() - config.get_row_to_win())) {
-            for (col in 0 until config.get_m() - config.get_row_to_win()) {
+            for (col in 0 .. config.get_m() - config.get_row_to_win()) {
                 res = true
                 for (i in 0 until config.get_row_to_win()) {
                     res = res and (this.board[row + i][col + i] == this.mark)
@@ -57,7 +57,7 @@ class Observation {
         }
 //        Diagonal negative
         for (row in config.get_n() - config.get_row_to_win() - 1 downTo config.get_row_to_win() - 1 step 1) {
-            for (col in (0 until config.get_m() - config.get_row_to_win())) {
+            for (col in (0 .. config.get_m() - config.get_row_to_win())) {
                 res = true
                 for (i in 0 until config.get_row_to_win()) {
                     res = res and (this.board[row - i][col + i] == this.mark)

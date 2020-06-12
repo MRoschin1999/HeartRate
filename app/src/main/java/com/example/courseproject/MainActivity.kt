@@ -15,6 +15,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var config:Config = Config(6,7,4)
         var observation:Observation = Observation(config)
+        fun resetGame(){
+            observation = Observation(config)
+            for (i in 0 until 6) {
+                for (j in 0 until 7) {
+                    var buttonID: String = "button_" + i + j
+                    var resID: Int = resources.getIdentifier(buttonID, "id", packageName)
+                    var a = findViewById<Button>(resID)
+                    a.setBackgroundDrawable(getResources().getDrawable(R.drawable.circle_btn));
+                }
+            }
+        }
         val toast = Toast.makeText(
             applicationContext,
             "vot i vse",
@@ -38,20 +49,14 @@ class MainActivity : AppCompatActivity() {
                             a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
                     } else{
                         toast.show()
-
+                        resetGame()
                     }
                 }
             }
         }
-        fun resetGame(){
-            for (i in 0 until 6) {
-                for (j in 0 until 7) {
-                    var buttonID: String = "button_" + i + j
-                    var resID: Int = resources.getIdentifier(buttonID, "id", packageName)
-                    var a = findViewById<Button>(resID)
-                    a.setBackgroundDrawable(getResources().getDrawable(R.drawable.circle_btn));
-                }
-            }
+        var a = findViewById<Button>(resources.getIdentifier("reset","id",packageName))
+        a.setOnClickListener{
+            resetGame()
         }
     }
 }
