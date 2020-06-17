@@ -1,5 +1,6 @@
 package com.example.courseproject
 
+import Agent
 import Config
 import Observation
 import android.os.Bundle
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var config:Config = Config(6,7,4)
         var observation:Observation = Observation(config)
+        var agent:Agent = Agent(config);
         fun resetGame(){
             observation = Observation(config)
             for (i in 0 until 6) {
@@ -48,6 +50,28 @@ class MainActivity : AppCompatActivity() {
                         if (res.mark == 2)
                             a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
                     } else{
+                        if (res.mark == 1)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue_btn));
+                        if (res.mark == 2)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
+                        toast.show()
+                        resetGame()
+                    }
+                    res = observation.nextMove(config, agent.calculate_the_move(1, observation))
+                    buttonID = "button_"+res.row+res.col
+                    resID= resources.getIdentifier(buttonID,"id",packageName)
+                    a = findViewById(resID)
+                    var obs = observation.board
+                    if (!res.win) {
+                        if (res.mark == 1)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue_btn));
+                        if (res.mark == 2)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
+                    } else{
+                        if (res.mark == 1)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.blue_btn));
+                        if (res.mark == 2)
+                            a.setBackgroundDrawable(getResources().getDrawable(R.drawable.red_btn));
                         toast.show()
                         resetGame()
                     }

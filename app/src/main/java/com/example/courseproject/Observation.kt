@@ -1,10 +1,12 @@
 class Observation {
     var mark: Int = 1;
     var board: Array<Array<Int>> = Array(6, { Array(7, {0}) });
+    var config: Config;
 
     constructor(config: Config) {
-        this.board = Array(config.get_n(), { Array(config.get_m(), {0}) });
-        this.mark = 1;
+        this.board = Array(config.get_n(), { Array(config.get_m(), { 0 }) })
+        this.mark = 1
+        this.config = config
     }
 
     fun nextMove(config: Config, col: Int): piece_drop{
@@ -27,8 +29,8 @@ class Observation {
         var res: Boolean
 //        Horizontal
         for (row in 0 until config.get_n()) {
-            res = true
             for (col in 0 .. (config.get_m() - config.get_row_to_win())) {
+                res = true
                 for (i in 0 until config.get_row_to_win()) {
                     res = res and (this.board[row][col + i] == this.mark)
                 }
@@ -46,7 +48,7 @@ class Observation {
             }
         }
 //        Diagonal positive
-        for (row in 0 until (config.get_n() - config.get_row_to_win())) {
+        for (row in 0 .. (config.get_n() - config.get_row_to_win())) {
             for (col in 0 .. config.get_m() - config.get_row_to_win()) {
                 res = true
                 for (i in 0 until config.get_row_to_win()) {
@@ -56,7 +58,7 @@ class Observation {
             }
         }
 //        Diagonal negative
-        for (row in config.get_n() - config.get_row_to_win() - 1 downTo config.get_row_to_win() - 1 step 1) {
+        for (row in config.get_n() - 1 downTo config.get_row_to_win() - 1 step 1) {
             for (col in (0 .. config.get_m() - config.get_row_to_win())) {
                 res = true
                 for (i in 0 until config.get_row_to_win()) {
@@ -66,5 +68,10 @@ class Observation {
             }
         }
         return false
+    }
+    fun copyOf(): Observation {
+        var tmp = Observation(this.config)
+        tmp.board = this.board.copyOf()
+        return tmp
     }
 }
